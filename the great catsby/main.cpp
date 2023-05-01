@@ -5,9 +5,12 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
+#include "Game.h"
+
 int main()
 {
-    
-
-    return 0;
+    Game myGame;
+    while(!Keyboard::isKeyPressed(Keyboard::Escape)) {
+        myGame.run();
+    }
 }
