@@ -10,7 +10,5 @@
 int main()
 {
     Game myGame;
-    while(!Keyboard::isKeyPressed(Keyboard::Escape)) {
-        myGame.run();
-    }
+    myGame.run();
 }
