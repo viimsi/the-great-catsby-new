@@ -12,8 +12,12 @@ using namespace std;
 using namespace sf;
 
 class Game: public Player, public Methods {
+private:
+	Clock timer;
+	bool jump_check;
+	RenderWindow game;
 public:
-	Game() {}
+	Game() : Player(timer, jump_check), Methods(game) {}
 	~Game() {}
 
 	void render();

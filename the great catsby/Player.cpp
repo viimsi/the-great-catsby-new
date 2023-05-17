@@ -12,8 +12,12 @@ void Player::update() {
 	left = player.getPosition().x;
 	right = player.getPosition().x + player.getSize().x;
 	top = player.getPosition().y;
-	center.x = player.getPosition().x + 16;
-	center.y = player.getPosition().y + 16;
+	center.x = player.getPosition().x + 32;
+	center.y = player.getPosition().y + 32;
+}
+
+bool Player::get_collision_check() {
+	return collision_check;
 }
 
 void Player::movement() {
@@ -28,9 +32,9 @@ void Player::movement() {
 		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Space)) {
-		float nuoSuolioPr = timer.getElapsedTime().asSeconds();
-		if (nuoSuolioPr < 0.2f) {
-			player.move(0, -10.0f);
+		float since_jump_start = timer.getElapsedTime().asSeconds();
+		if (since_jump_start < 0.15f) {
+			player.move(0, -18.0f);
 			jump_check = true;
 		}
 		else {
@@ -38,8 +42,10 @@ void Player::movement() {
 		}
 	}
 
+	cout << jump_check << " | ";
+
 	//gravitacijos logika
-	if (bottom < platform_height && jump_check == false) {
+	if (bottom < platform_height && !jump_check) {
 		player.move(0, gravity_speed);
 	}
 
@@ -51,28 +57,31 @@ void Player::movement() {
 
 	update();
 
+	//neveikia
 	for (int i = 0; i < collision_level.size(); i++) {
 		for (int j = 0; j < collision_level[i].size(); j++) {
 
 			if (collision_level[i][j] == Vector2i(1, 1)) {
-				int tbottom, ttop, tleft, tright; //tile objekto šonai
-				tbottom = i * 64 + 64;
-				ttop = i * 64;
-				tright = j * 64 + 64;
-				tleft = j * 64;
+				int t_bottom, t_top, t_left, t_right; //tile objekto šonai
+				t_bottom = i * 64 + 64;
+				t_top = i * 64;
+				t_right = j * 64 + 64;
+				t_left = j * 64;
 
-				if (right < tleft || left > tright || top > tbottom || bottom < ttop) {
+				if (right < t_left || left > t_right || top > t_bottom || bottom < t_top) {
 					collision_check = false;
 				}
-				else if ((bottom == ttop || bottom == ttop + 1 || bottom == ttop + 2) && (right > tleft || left < tright)) { //kai top collision yra true
-					platform_height = ttop;
-					platform_right = tright;
-					platform_left = tleft;
+				else if ((bottom == t_top || bottom == t_top + 1 || bottom == t_top + 2) && (right > t_left || left < t_right)) { //kai top collision yra true
+					platform_height = t_top;
+					platform_right = t_right;
+					platform_left = t_left;
 					collision_check = true;
 				}
 				else {
 					collision_check = false;
 				}
+
+				cout << collision_check << " | ";
 			}
 			if (collision_level[i][j] == Vector2i(0, 0)) {
 				int c_bottom, c_top, c_left, c_right; //coin objekto šonai
@@ -89,6 +98,8 @@ void Player::movement() {
 	}
 
 	//tikrinti ar YRA collision
+	cout << bottom << " | " << platform_height << endl;
+
 	if ((bottom == platform_height || bottom == platform_height + 1 || bottom == platform_height + 2) && (right > platform_left && left < platform_right)) { //kai top collision yra true
 		collision_check = true;
 	}

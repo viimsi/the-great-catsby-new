@@ -12,6 +12,9 @@
 using namespace std;
 using namespace sf;
 
+void Methods::create_window() {
+	game.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 64), "The Great Catsby", Style::Titlebar | Style::Close);
+}
 void Methods::visual_map() {
 	//ruošiama nuskaityti tilemap'ą
 	ifstream fd("Resources/level1.txt");
@@ -66,7 +69,7 @@ void Methods::collision_map() {
 			tempLevel.push_back(Vector2i(1, 1)); //1,1 koordinatė reiškia kad tai yra COLLISION objektas
 		}
 		else if (x == '0' && y == '0') {
-			tempLevel.push_back(Vector2i(0, 0)); //1,1 koordinatė reiškia kad tai yra COIN, bet ne collision objektas
+			tempLevel.push_back(Vector2i(0, 0)); //0, 0 koordinatė reiškia kad tai yra COIN, bet ne collision objektas
 			MAX_score++;
 		}
 
@@ -83,11 +86,16 @@ void Methods::load_map() {
 	collision_map();
 }
 void Methods::render_map() {
+	background_texture.loadFromFile("Resources/background.png");
+	background.setTexture(background_texture);
+	background.setScale(Vector2f(2, 2));
+
 	for (int i = 0; i < visual_level.size(); i++) {
 		for (int j = 0; j < visual_level[i].size(); j++) {
 			if (visual_level[i][j].x != -1 && visual_level[i][j].y != -1) {
 				tiles.setPosition(j * 64, i * 64);
-				tiles.setTextureRect(IntRect(visual_level[i][j].x * 64, visual_level[i][j].y * 64, 64, 64));
+				tiles.setTextureRect(IntRect(visual_level[i][j].x * 32, visual_level[i][j].y * 32, 32, 32));
+				tiles.setScale(Vector2f(2, 2));
 				game.draw(tiles);
 			}
 		}

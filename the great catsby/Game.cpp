@@ -14,54 +14,55 @@ using namespace std;
 using namespace sf;
 
 void Game::render() {
-	Methods::game.setFramerateLimit(60);
+	game.setFramerateLimit(60);
 
 	//žaidimo eiga
-	while (Methods::game.isOpen()) 
+	while (game.isOpen()) 
 	{
 		//set view
-		player_view.setCenter(WINDOW_WIDTH / 2.f, Player::player.getPosition().y);
-		Methods::game.setView(player_view);
+		player_view.setCenter(WINDOW_WIDTH / 2.f, player.getPosition().y);
+		game.setView(player_view);
 
 		//atnaujinama (update)
-		Methods::game.clear(Color(123, 205, 233)); //prieš tai ėjęs frame ištrinamas
-		Methods::game.draw(Methods::background);
+		game.clear(Color(123, 205, 233)); //prieš tai ėjęs frame ištrinamas
+		game.draw(Methods::background);
 
 		//load'inu map'ą
 		Methods::render_map();
 
 		//judejimas
-		Player::movement();
+		movement();
 
 		Event ev;
-		Methods::game.setKeyRepeatEnabled(false);
-		while (Methods::game.pollEvent(ev)) {
+		game.setKeyRepeatEnabled(false);
+		while (game.pollEvent(ev)) {
 			switch (ev.type) {
 			case Event::Closed:
-				Methods::game.close();
+				game.close();
 				break;
 			case Event::KeyPressed:
 				if (ev.key.code == Keyboard::Space) {
-					if (Methods::collision_check) {
-						Methods::timer.restart();
+					if (get_collision_check()) {
+						timer.restart();
 					}
 				}
 				break;
 			case Event::KeyReleased:
 				if (ev.key.code == Keyboard::Space) {
-					Methods::jump_check = false;
+					jump_check = false;
 				}
 			}
 			break;
 			}
 
-		Methods::game.draw(Player::player);
+		game.draw(player);
 
-		Methods::game.display();
+		game.display();
 	}
 }
 
 void Game::run() {
+	Methods::create_window();
 	Methods::load_map();
 	render();
 }

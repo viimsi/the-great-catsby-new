@@ -19,20 +19,17 @@ protected:
 		tiles,
 		foreground;
 	RectangleShape map;
-	RenderWindow game;
 	vector<vector<Vector2i>> visual_level, collision_level;
 	int MAX_score;
 	Clock timer;
-	bool jump_check, collision_check;
-
+	RenderWindow& game;
 public:
-	Methods() : map(Vector2f(MAP_HEIGHT, MAP_WIDTH)) {
+	Methods(RenderWindow& window) : game(window), map(Vector2f(MAP_HEIGHT, MAP_WIDTH)) {
 		MAX_score = 0;
-		game.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 64), "The Great Catsby", Style::Titlebar | Style::Close);
-		cout << "done";
 	}
 	~Methods() {}
 
+	void create_window();
 	void visual_map();
 	void collision_map();
 	void load_map();
