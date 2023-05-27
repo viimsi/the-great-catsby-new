@@ -81,10 +81,6 @@ void Methods::collision_map() {
 
 	collision_level.push_back(tempLevel);
 }
-void Methods::load_map() {
-	visual_map();
-	collision_map();
-}
 void Methods::render_map() {
 	background_texture.loadFromFile("Resources/background.png");
 	background.setTexture(background_texture);

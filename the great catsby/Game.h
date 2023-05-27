@@ -17,7 +17,7 @@ private:
 	bool jump_check;
 	RenderWindow game;
 public:
-	Game() : Player(timer, jump_check), Methods(game) {}
+	Game() : jump_check(false), Player(timer, jump_check), Methods(game) {}
 	~Game() {}
 
 	void render();

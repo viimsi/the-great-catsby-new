@@ -11,14 +11,13 @@ using namespace std;
 class Player: public Methods {
 protected:
 	int bottom, left, right, top;
-	float gravity;
 	int platform_height, platform_left, platform_right;
-	Vector2f center;
+	float jump_height, speed;
+	Vector2f center, velocity;
 	Texture player_texture;
 	View player_view;
-	bool collision_check;
+	bool collision_check, & jump_check, is_standing;
 	Clock& timer;
-	bool &jump_check;
 	RectangleShape player;
 
 public:
@@ -28,11 +27,23 @@ public:
 		player.setPosition(MAP_WIDTH / 2.f, MAP_HEIGHT - 128);
 		player.setSize(Vector2f(64, 128));
 		player.setTexture(&player_texture);
+		velocity.x = 0.f;
+		velocity.y = 0.f;
+		jump_height = 150.f;
+		speed = 150.f;
+		collision_check = true;
+		is_standing = true;
+		jump_check = false;
+
+		platform_height = MAP_HEIGHT - 64;
+		platform_right = MAP_WIDTH;
+		platform_left = 0;
 	}
 	~Player() {}
 
 	void update();
-	bool get_collision_check();
-	void movement();
+	void get_collision_check();
+	void load_collision_level();
+	void movement(float delta_time);
 };
 

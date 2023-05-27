@@ -32,6 +32,5 @@ public:
 	void create_window();
 	void visual_map();
 	void collision_map();
-	void load_map();
 	void render_map();
 };
