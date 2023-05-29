@@ -17,10 +17,11 @@ void Game::render() {
 	game.setFramerateLimit(60);
 
 	//žaidimo eiga
-	while (game.isOpen()) 
+	while (game.isOpen())
 	{
 		//set view
-		player_view.setCenter(WINDOW_WIDTH / 2.f, player.getPosition().y);
+
+		player_view.setCenter(VIEW_WIDTH / 2.f, player.getPosition().y);
 		game.setView(player_view);
 
 		//atnaujinama (update)
@@ -30,6 +31,8 @@ void Game::render() {
 		//load'inu map'ą
 		Methods::render_map();
 
+		//judejimas
+		movement();
 
 		Event ev;
 		game.setKeyRepeatEnabled(false);
@@ -40,15 +43,18 @@ void Game::render() {
 				break;
 			case Event::KeyPressed:
 				if (ev.key.code == Keyboard::Space) {
-					cout << "space" << endl;
+					if (get_collision_check()) {
+						timer.restart();
+					}
+				}
+				break;
+			case Event::KeyReleased:
+				if (ev.key.code == Keyboard::Space) {
+					jump_check = false;
 				}
 			}
+			break;
 		}
-
-		float delta_time = timer.restart().asSeconds();
-
-		//judejimas
-		movement(delta_time);
 
 		game.draw(player);
 
@@ -59,6 +65,6 @@ void Game::render() {
 void Game::run() {
 	Methods::create_window();
 	Methods::visual_map();
-	Player::load_collision_level();
+	Player::load_collision_map();
 	render();
 }

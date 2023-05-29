@@ -9,6 +9,6 @@
 
 int main()
 {
-    Game myGame;
-    myGame.run();
+    Game the_great_catsby;
+    the_great_catsby.run();
 }

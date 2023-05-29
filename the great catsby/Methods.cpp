@@ -13,7 +13,7 @@ using namespace std;
 using namespace sf;
 
 void Methods::create_window() {
-	game.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 64), "The Great Catsby", Style::Titlebar | Style::Close);
+	game.create(VideoMode(1200, 900, 32), "The Great Catsby");
 }
 void Methods::visual_map() {
 	//ruošiama nuskaityti tilemap'ą
@@ -84,14 +84,12 @@ void Methods::collision_map() {
 void Methods::render_map() {
 	background_texture.loadFromFile("Resources/background.png");
 	background.setTexture(background_texture);
-	background.setScale(Vector2f(2, 2));
 
 	for (int i = 0; i < visual_level.size(); i++) {
 		for (int j = 0; j < visual_level[i].size(); j++) {
 			if (visual_level[i][j].x != -1 && visual_level[i][j].y != -1) {
-				tiles.setPosition(j * 64, i * 64);
+				tiles.setPosition(j * 32, i * 32);
 				tiles.setTextureRect(IntRect(visual_level[i][j].x * 32, visual_level[i][j].y * 32, 32, 32));
-				tiles.setScale(Vector2f(2, 2));
 				game.draw(tiles);
 			}
 		}
