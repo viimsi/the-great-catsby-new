@@ -27,7 +27,6 @@ public:
 	Methods(RenderWindow& window) : game(window), map(Vector2f(MAP_HEIGHT, MAP_WIDTH)) {
 		MAX_score = 0;
 	}
-	~Methods() {}
 
 	void create_window();
 	void visual_map();

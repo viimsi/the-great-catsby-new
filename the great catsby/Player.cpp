@@ -8,7 +8,7 @@ using namespace sf;
 using namespace std;
 
 void Player::update() {
-	bottom = player.getPosition().y + player.getSize().y;
+	bottom = player.getPosition().y + player.getSize().y / 2.f;
 	left = player.getPosition().x;
 	right = player.getPosition().x + player.getSize().x;
 	top = player.getPosition().y;
