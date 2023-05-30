@@ -18,16 +18,17 @@ private:
 	bool jump_check, is_player_hurt;
 	float penalty_value;
 	RenderWindow game;
-	int enemy_amount;
+	int enemy_amount, coin_coordinates[24][10];
 	Enemy* books;
 public:
 	Game() : jump_check(false), Player(timer, jump_check), Methods(game), enemy_amount(0), is_player_hurt(false), penalty_value(2.f) {
-		books = new Enemy[enemy_amount];
+		books = new Enemy[enemy_amount + 1];
 	}
 	~Game() {
 		delete[] books;
 	}
 
+	void text();
 	void render();
 	void run();
 };

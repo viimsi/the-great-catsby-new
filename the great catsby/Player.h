@@ -16,9 +16,10 @@ protected:
 	int platform_height, platform_left, platform_right;
 	Texture player_texture, hurt_player_texture;
 	View player_view;
-	bool collision_check, & jump_check;
+	bool collision_check, &jump_check;
 	Clock& timer;
 	RectangleShape player;
+	int total_coins;
 
 public:
 	Player(Clock& clock, bool& check) : timer(clock), jump_check(check), player_view(Vector2f(MAP_WIDTH / 2.f, MAP_HEIGHT / 2.f), Vector2f(VIEW_WIDTH, VIEW_HEIGHT)) , Methods(game) {
@@ -37,8 +38,11 @@ public:
 		platform_height = MAP_HEIGHT - 32;
 		platform_right = MAP_WIDTH;
 		platform_left = 0;
+
+		total_coins = 0;
 	}
 
+	void array_to_zero();
 	void update();
 	void load_collision_map();
 	bool get_collision_check();

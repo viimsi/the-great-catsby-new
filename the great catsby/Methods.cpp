@@ -16,6 +16,7 @@ void Methods::create_window() {
 	game.create(VideoMode(1200, 900, 32), "The Great Catsby");
 }
 void Methods::visual_map() {
+
 	//ruošiama nuskaityti tilemap'ą
 	ifstream fd("Resources/level1.txt");
 	vector<Vector2i> tempLevel;

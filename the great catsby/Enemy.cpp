@@ -19,7 +19,7 @@ void Enemy::display(RenderWindow &game) {
 	right = book.getPosition().x + book.getSize().x;
 	left = book.getPosition().x;
 
-	book.setFillColor(Color::Red);
+	book.setTexture(&book_texture);
 	game.draw(book);
 }
 int Enemy::get_bottom() {

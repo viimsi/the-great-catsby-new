@@ -7,6 +7,23 @@
 using namespace sf;
 using namespace std;
 
+int operator+=(int& total_points, Vector2i& coin_coordinates) {
+	if (coin_coordinates == Vector2i(0, 0)) {
+		total_points++;
+	}
+
+	return total_points;
+}
+
+void Player::array_to_zero() {
+	for (int i = 0; i < 24; i++) {
+		for (int j = 0; j < 10; j++) {
+			if (coin_coordinates[i][j] == 1) {
+				coin_coordinates[i][j] = 0;
+			}
+		}
+	}
+}
 void Player::update() {
 	bottom = player.getPosition().y + player.getSize().y / 2.f;
 	left = player.getPosition().x;
@@ -23,6 +40,7 @@ void Player::load_collision_map() {
 bool Player::get_collision_check() {
 	return collision_check;
 }
+
 
 void Player::movement() {
 
@@ -97,11 +115,16 @@ void Player::movement() {
 				c_left = j * 32;
 
 				if (center.x <= c_right && center.x >= c_left && center.y >= c_top && center.y <= c_bottom) {
-					//taskai WIP
+					if(coin_coordinates[i][j] == 0) {
+						coin_coordinates[i][j] = 1;
+						total_coins += collision_level[i][j];
+					}
 				}
 			}
 		}
 	}
+
+	cout << total_coins << endl;
 
 	if ((bottom == platform_height || bottom == platform_height + 1 || bottom == platform_height + 2) && (right > platform_left && left < platform_right)) { //kai top collision yra true
 		collision_check = true;

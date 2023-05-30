@@ -20,11 +20,12 @@ protected:
 		foreground;
 	RectangleShape map;
 	vector<vector<Vector2i>> visual_level, collision_level;
-	int MAX_score;
+	int MAX_score, 
+		coin_coordinates[24][10];
 	Clock timer;
 	RenderWindow& game;
 public:
-	Methods(RenderWindow& window) : game(window), map(Vector2f(MAP_HEIGHT, MAP_WIDTH)) {
+	Methods(RenderWindow& window) : game(window), map(Vector2f(MAP_HEIGHT, MAP_WIDTH)), coin_coordinates{} {
 		MAX_score = 0;
 	}
 

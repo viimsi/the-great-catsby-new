@@ -12,6 +12,7 @@ using namespace std;
 class Enemy {
 private:
 	Vector2f position, size;
+	Texture book_texture;
 	int bottom, top, right, left;
 
 public:
@@ -32,6 +33,8 @@ public:
 		top = 0;
 		right = 0;
 		left = 0;
+
+		book_texture.loadFromFile("Resources/book.png");
 	}
 	~Enemy() {}
 

@@ -87,7 +87,14 @@ void Game::render() {
 
 			Enemy new_book(position, size);
 
-			books[enemy_amount] = new_book;
+			Enemy* temp = new Enemy[enemy_amount + 1];
+			for (int i = 0; i < enemy_amount; i++) {
+				temp[i] = books[i];
+			}
+			temp[enemy_amount] = new_book;
+
+			delete[] books;
+			books = temp;
 			enemy_amount++;
 
 			enemy_clock.restart();
@@ -108,6 +115,10 @@ void Game::render() {
 
 				if(!is_player_hurt) {
 					is_player_hurt = true;
+					if(total_coins > 0) {
+						array_to_zero();
+						total_coins--;
+					}
 
 					if(penalty_value > 0.04f) {
 						penalty_value -= 0.08f;
