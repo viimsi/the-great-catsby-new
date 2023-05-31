@@ -13,10 +13,9 @@ using namespace std;
 using namespace sf;
 
 void Methods::create_window() {
-	game.create(VideoMode(1200, 900, 32), "The Great Catsby");
+	game.create(VideoMode(1152, 800, 32), "The Great Catsby");
 }
 void Methods::visual_map() {
-
 	//ruošiama nuskaityti tilemap'ą
 	ifstream fd("Resources/level1.txt");
 	vector<Vector2i> tempLevel;
@@ -83,6 +82,19 @@ void Methods::collision_map() {
 	collision_level.push_back(tempLevel);
 }
 void Methods::render_map() {
+	//gameover texture setup
+	gameover_texture.loadFromFile("Resources/gameover.png");
+	gameover.setTexture(gameover_texture);
+	gameover.setScale(4, 4);
+
+
+	//foreground setup
+	foreground_texture.loadFromFile("Resources/foreground.png");
+	foreground.setTexture(foreground_texture);
+	foreground.setScale(4, 4);
+
+	//background setup
+	
 	background_texture.loadFromFile("Resources/background.png");
 	background.setTexture(background_texture);
 

@@ -146,14 +146,26 @@
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Image.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Definitions.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Methods.h" />
     <ClInclude Include="Player.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\background.png" />
+    <Image Include="Resources\book.png" />
+    <Image Include="Resources\gameover.png" />
+    <Image Include="Resources\player1.png" />
+    <Image Include="Resources\player2.png" />
+    <Image Include="Resources\tiles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\col1.txt" />
+    <Text Include="Resources\level1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resources\Daydream.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

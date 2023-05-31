@@ -14,10 +14,12 @@ class Methods {
 protected:
 	Texture background_texture,
 		tile_texture,
-		foreground_texture;
+		foreground_texture,
+		gameover_texture;
 	Sprite background,
 		tiles,
-		foreground;
+		foreground,
+		gameover;
 	RectangleShape map;
 	vector<vector<Vector2i>> visual_level, collision_level;
 	int MAX_score, 
